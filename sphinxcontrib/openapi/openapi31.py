@@ -105,7 +105,7 @@ def _parse_schema(schema, method):
         # we only show the one since we can't show everything, but we need to
         # figure out which one
         for sub_schema in schema["anyOf"]:
-            if sub_schema["type"] == "null":
+            if "type" not in sub_schema or sub_schema["type"] == "null":
                 continue
 
             return _parse_schema(sub_schema, method)
@@ -114,7 +114,7 @@ def _parse_schema(schema, method):
     if "oneOf" in schema:
         # we only show the first one since we can't show everything
         for sub_schema in schema["oneOf"]:
-            if sub_schema["type"] == "null":
+            if "type" not in sub_schema or sub_schema["type"] == "null":
                 continue
 
             return _parse_schema(sub_schema, method)
